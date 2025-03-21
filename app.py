@@ -472,13 +472,35 @@ def main():
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return '''
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <h1>Welcome to the Resume Analyzer</h1>
+        <p>Use the <strong>/analyze_resume</strong> endpoint to upload and analyze your resume.</p>
+        <form action="/analyze_resume" method="post" enctype="multipart/form-data">
+            <label for="file">Upload Resume (PDF only):</label><br>
+            <input type="file" name="file" id="file" required><br><br>
+            <label for="field">Select Field:</label><br>
+            <select name="field" id="field">
+                <option value="data_science">Data Science</option>
+                <option value="web_development">Web Development</option>
+            </select><br><br>
+            <button type="submit">Analyze Resume</button>
+        </form>
+    </body>
+    </html>
+    '''
+
 @app.route('/analyze_resume', methods=['POST'])
 def analyze():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
 
     file = request.files['file']
-    field = request.form.get('field', 'data_science') #get field from form. default to data science.
+    field = request.form.get('field', 'data_science') # Get field from form. Default to data science.
 
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
@@ -487,7 +509,7 @@ def analyze():
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
             file.save(temp_file.name)
             result = analyze_resume(temp_file.name, field)
-            os.unlink(temp_file.name) #delete temp file.
+            os.unlink(temp_file.name) # Delete temp file.
         return jsonify(result)
 
     return jsonify({'error': 'An error occurred'})
