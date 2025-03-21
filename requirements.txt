@@ -21,6 +21,7 @@ exceptiongroup==1.2.2
 filelock==3.17.0
 Flask==3.1.0
 frontend==0.0.3
+gunicorn
 h11==0.14.0
 httplib2==0.22.0
 idna==3.10
