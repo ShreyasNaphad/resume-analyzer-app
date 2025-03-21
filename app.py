@@ -6,6 +6,9 @@ from PyPDF2 import PdfReader
 from docx import Document
 import re
 import random
+import nltk
+nltk.download('stopwords')
+
 
 # ... (Your KEYWORD_DICT, REQUIRED_SECTIONS, ALLOWED_FONTS, FEEDBACK_POOL,
 #      get_dynamic_feedback, parse_pdf, parse_docx, check_fonts,
