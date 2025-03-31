@@ -66,15 +66,14 @@ ALLOWED_FONTS = {
 # Feedback pool
 FEEDBACK_POOL = {
     "core_keywords": [
-       # "You scored {score}/10 for core keywords. "
-        "Try adding key terms like {examples}.",
+        "You scored {score}/10 for core keywords. Try adding key terms like {examples}.",
         "Your core keywords section is good, but it could be stronger. Mention technologies like {examples}.",
         "Consider adding more relevant skills to align with the role, such as {examples}.",
         "Recruiters look for specific terms. Include {examples} to improve visibility.",
         "Highlight your experience with {examples} to boost your core skills."
     ],
     "soft_skills": [
-        " Elaborate on teamwork or leadership in your roles.",
+        "Elaborate on teamwork or leadership in your roles.",
         "Including examples of communication and critical thinking could strengthen your soft skills.",
         "Great work so far! Add more emphasis on problem-solving or adaptability.",
         "Recruiters value interpersonal abilities. Highlight specific scenarios where your soft skills shine.",
@@ -103,9 +102,9 @@ FEEDBACK_POOL = {
     ],
     "certifications": [
         "Certifications are essential. Highlight courses or certifications in {field} to add credibility.",
-        "Adding more certificates could enhance your profile.",
+        "Adding  more certificates could enhance your profile.",
         "Showcase relevant certifications to emphasize your technical expertise.",
-        "Consider pursuing more certifications to boost your score.",
+        "Consider pursuing certifications in {examples} to boost your score.",
         "Certifications from your field can validate your skills and improve recruiter interest."
     ],
     "fonts": [
@@ -542,7 +541,7 @@ index_html = """
 
         .header p {
             color: #666;
-            font-size: 1.1em;
+            font-size: 1.5em;
         }
 
         .upload-container {
@@ -561,7 +560,7 @@ index_html = """
             margin-bottom: 10px;
             color: var(--accent-color);
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
         .file-input-container {
@@ -599,7 +598,7 @@ index_html = """
             padding: 15px;
             border: 2px solid #ddd;
             border-radius: 10px;
-            font-size: 1em;
+            font-size: 1.1em;
             color: var(--accent-color);
             background: white;
             cursor: pointer;
@@ -650,7 +649,7 @@ index_html = """
 
         .feature-card p {
             color: #666;
-            font-size: 0.9em;
+            font-size: 1.1em;
         }
 
         @media (max-width: 768px) {
@@ -677,7 +676,7 @@ index_html = """
                     <label for="file">Upload Your Resume</label>
                     <div class="file-input-container">
                         <input type="file" name="file" id="file" required accept=".pdf,.docx">
-                        <p>Drag and drop your resume here or click to browse</p>
+                        <p id="file-name-display">Drag and drop your resume here or click to browse</p>
                         <p style="font-size: 0.9em; margin-top: 10px; color: #666;">(PDF or DOCX format)</p>
                     </div>
                 </div>
@@ -710,6 +709,16 @@ index_html = """
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById('file').addEventListener('change', function() {
+        const fileNameDisplay = document.getElementById('file-name-display');
+        if (this.files && this.files.length > 0) {
+            fileNameDisplay.textContent = this.files[0].name;
+        } else {
+            fileNameDisplay.textContent = 'Drag and drop your resume here or click to browse';
+        }
+    });
+</script>
 </body>
 </html>
 """
